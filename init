@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# make development envs
+echo -n "enter database name: ";
+read db_name;
+echo -n "enter username of database: ";
+read db_user;
+echo -n "enter password of database: ";
+read db_password;
+
+echo "DB_NAME=${db_name}"\ >> $(pwd)/envs/app/development/.env;
+echo "DB_USER=${db_user}"\ >> $(pwd)/envs/app/development/.env;
+echo "DB_PASSWORD=${db_password}"\ >> $(pwd)/envs/app/development/.env;
+echo "DB_HOST=database"\ >> $(pwd)/envs/app/development/.env;
+echo "DB_PORT=5432"\  >> $(pwd)/envs/app/development/.env;
+echo "ALLOWED_HOSTS=*"\ >> $(pwd)/envs/app/development/.env;
+
+## generate secret key
+seed='<=>|-,;:!/.()[]{}*\&#%+012345689abcdefghiklmnopqrstuvwxyz';
+secret_key=''
+for i in $(awk '
+  BEGIN {	
+    srand();
+    for (i=0; i<50; i++) 
+      printf("%d ", 56 * rand());
+  }
+'); do 
+  secret_key="${secret_key}${seed:i:1}"
+done
+echo "SECRET_KEY=$secret_key"\ >> $(pwd)/envs/app/development/.env;
+
+
+# development image build
+echo "1. development image build"
+docker-compose build
+
+
+# database migrate
+echo "2. database migrate"
+docker-compose up -d db
+docker-compose run --entrypoint="sh ./docker/development/init.sh" app
+
+
+# project start
+echo "development environment finished!"
+echo "project start"
+docker-compose up

@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  database:
+    env_file: 
+      - envs/database/development/.env
+    image: postgres:12.2-alpine
+    container_name: database.knufesta2019
+    volumes:
+      - ./database/volume:/var/lib/postgresql/data
+
+  app:
+    env_file:
+      - envs/app/development/.env
+    container_name: app.knufesta2019
+    build:
+      context: ./app
+      dockerfile: ./docker/development/Dockerfile
+    volumes:
+      - "./app:/app"
+    ports:
+      - "8000:8000"
