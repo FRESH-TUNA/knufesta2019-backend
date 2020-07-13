@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # make app envs
-echo -n "enter database name: ";
+printf "enter database name: ";
 read db_name;
-echo -n "enter username of database: ";
+printf "enter username of database: ";
 read db_user;
-echo -n "enter password of database: ";
+printf "enter password of database: ";
 read db_password;
 
 echo "DB_NAME=${db_name}"\ >> $(pwd)/envs/app/development/.env;
@@ -41,12 +41,12 @@ docker-compose build
 
 
 # database migrate
-# echo "2. database migrate"
-# docker-compose up -d database
-# docker-compose run --entrypoint="sh ./docker/development/init.sh" app
+echo "2. database migrate"
+docker-compose up -d database
+docker-compose run --entrypoint="sh ./docker/development/init.sh" app
 
 
 # project start
-# echo "development environment finished!"
-# echo "project start"
-# docker-compose up
+echo "development environment finished!"
+echo "project start!"
+docker-compose up

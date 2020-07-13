@@ -1,4 +1,3 @@
-db/volume/
-*.pyc
-env/
 app/temp/*
+database/volume
+envs/*

@@ -1,11 +1,11 @@
 #!/bin/sh
 
-echo -e "postgres running check "
-until pg_isready -h database; do
-  >&2 echo -e "."
+printf "postgres running check ..."
+until pg_isready -h database > /dev/null 2>&1; do  
+  printf "."
   sleep 3
 done
-echo \ "postgres loaded! processing migration..."
+printf '\npostgres loaded! \n start migration ...\n'
 
 python3 /app/manage.py makemigrations
 python3 /app/manage.py migrate
