@@ -8,7 +8,7 @@ from rest_framework.mixins import (
     DestroyModelMixin
 )
 
-class ViewSet(
+class BaseViewSet(
     GenericViewSet, 
     ListModelMixin, 
     RetrieveModelMixin, 
