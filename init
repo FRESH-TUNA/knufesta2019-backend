@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# make development envs
+# make app envs
 echo -n "enter database name: ";
 read db_name;
 echo -n "enter username of database: ";
@@ -22,12 +22,17 @@ for i in $(awk '
   BEGIN {	
     srand();
     for (i=0; i<50; i++) 
-      printf("%d ", 56 * rand());
+      printf("%d ", 56 * rand() + 1);
   }
 '); do 
-  secret_key="${secret_key}${seed:i:1}"
+  secret_key="${secret_key}$(echo $seed | cut -c $i)"
 done
-echo "SECRET_KEY=$secret_key"\ >> $(pwd)/envs/app/development/.env;
+echo "SECRET_KEY=$secret_key"\ >> $(pwd)/envs/app/development/app.env;
+
+# make database envs
+echo "POSTGRES_DB=${db_name}"\ >> $(pwd)/envs/database/development/.env;
+echo "POSTGRES_USER=${db_user}"\ >> $(pwd)/envs/database/development/.env;
+echo "POSTGRES_PASSWORD=${db_password}"\ >> $(pwd)/envs/database/development/.env;
 
 
 # development image build
@@ -36,12 +41,12 @@ docker-compose build
 
 
 # database migrate
-echo "2. database migrate"
-docker-compose up -d db
-docker-compose run --entrypoint="sh ./docker/development/init.sh" app
+# echo "2. database migrate"
+# docker-compose up -d database
+# docker-compose run --entrypoint="sh ./docker/development/init.sh" app
 
 
 # project start
-echo "development environment finished!"
-echo "project start"
-docker-compose up
+# echo "development environment finished!"
+# echo "project start"
+# docker-compose up
