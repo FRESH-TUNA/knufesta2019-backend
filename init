@@ -27,7 +27,7 @@ for i in $(awk '
 '); do 
   secret_key="${secret_key}$(echo $seed | cut -c $i)"
 done
-echo "SECRET_KEY=$secret_key"\ >> $(pwd)/envs/app/development/app.env;
+echo "SECRET_KEY=$secret_key"\ >> $(pwd)/envs/app/development/.env;
 
 # make database envs
 echo "POSTGRES_DB=${db_name}"\ >> $(pwd)/envs/database/development/.env;
