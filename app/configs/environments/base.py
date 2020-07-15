@@ -27,8 +27,12 @@ DEBUG = True
 ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
 
 # Application definition
+PROJECT_APPS = [
+  'base',
+  'auth.apps.AuthConfig'
+]
 
-INSTALLED_APPS = [
+INSTALLED_APPS = PROJECT_APPS + [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
