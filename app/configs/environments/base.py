@@ -26,22 +26,29 @@ DEBUG = True
 
 ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
 
-# Application definition
-PROJECT_APPS = [
-  'base',
-  'auth.apps.AuthConfig'
-]
-
 AUTH_USER_MODEL = 'knufesta2019_auth.User'
 
-INSTALLED_APPS = PROJECT_APPS + [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+# Application definition
+PROJECT_APPS = [
+    'base',
+    'auth.apps.AuthConfig',
+    'index'
 ]
+
+PROJECT_LIBRARY = [
+    'rest_framework'
+]
+
+INSTALLED_APPS = \
+    PROJECT_APPS + \
+    PROJECT_LIBRARY + [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

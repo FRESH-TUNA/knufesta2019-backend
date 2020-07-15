@@ -8,12 +8,17 @@ from rest_framework.mixins import (
     DestroyModelMixin
 )
 
-class BaseViewSet(
+class BaseController(
     GenericViewSet, 
     ListModelMixin, 
     RetrieveModelMixin, 
     CreateModelMixin, 
     UpdateModelMixin, 
     DestroyModelMixin
+):
+    pass
+class BaseRetrieveOnlyController(
+    GenericViewSet, 
+    RetrieveModelMixin
 ):
     pass
