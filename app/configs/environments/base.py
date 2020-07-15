@@ -32,6 +32,8 @@ PROJECT_APPS = [
   'auth.apps.AuthConfig'
 ]
 
+AUTH_USER_MODEL = 'knufesta2019_auth.User'
+
 INSTALLED_APPS = PROJECT_APPS + [
     'django.contrib.admin',
     'django.contrib.auth',
