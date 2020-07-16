@@ -32,7 +32,8 @@ AUTH_USER_MODEL = 'knufesta2019_auth.User'
 PROJECT_APPS = [
     'base',
     'auth.apps.AuthConfig',
-    'index'
+    'index',
+    'friendboard'
 ]
 
 PROJECT_LIBRARY = [

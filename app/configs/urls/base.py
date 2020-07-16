@@ -19,6 +19,7 @@ from django.views import debug
 
 urlpatterns = [
     # rocket hello world
-    path('', include('index.urls')),
-    path('admin/', admin.site.urls),
+    path('index/', include('index.urls')),
+    path('friendboard/', include('friendboard.urls')),
+    path('admin', admin.site.urls),
 ]
